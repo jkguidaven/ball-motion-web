@@ -2,11 +2,13 @@ import { Drawer } from "./includes/drawer";
 import { Ball } from "./includes/ball";
 import { Engine } from "./includes/engine";
 import { Officer } from './includes/officer';
+import { AntQueen } from './includes/ant';
 
 class App {
   private drawer: Drawer;
   private ball: Ball;
   private engine: Engine;
+  private antQueen: AntQueen;
 
   init(canvas: any): void {
     canvas.width = window.innerWidth;
@@ -16,6 +18,7 @@ class App {
     this.drawer = new Drawer(canvas.getContext('2d'));
     this.ball = Ball.createInitialStateFromCanvas(canvas);
     this.engine = new Engine();
+    this.antQueen = new AntQueen();
   }
 
   begin(): void {
@@ -26,7 +29,16 @@ class App {
   private next(): void {
     window.requestAnimationFrame(() => {
       this.ball = this.engine.next(this.ball);
-      this.drawer.draw(this.ball, this.isGameover());
+      this.drawer.draw(
+        this.ball,
+        this.antQueen,
+        this.isGameover());
+
+      if (Officer.isAntHitByBall(
+        this.antQueen.currentChild(),
+        this.ball)) {
+        this.antQueen.birthAChild();
+      }
 
       if (!this.isGameover()) {
         this.next();
@@ -50,7 +62,3 @@ canvas.addEventListener('click', () => {
     app.begin();
   }
 });
-
-
-
-

@@ -1,4 +1,5 @@
 import { Ball } from "./ball";
+import { Ant } from "./ant";
 
 
 export class Officer {
@@ -9,5 +10,12 @@ export class Officer {
       || ball.y - ball.radius < 0
       || ball.x + ball.radius > innerWidth
       || ball.y + ball.radius > innerHeight;
+  }
+
+  static isAntHitByBall(ant: Ant, ball: Ball) {
+    return ant.x > (ball.x - ball.radius) &&
+      ant.x < (ball.x + ball.radius) &&
+      ant.y > (ball.y - ball.radius) &&
+      ant.y < (ball.y + ball.radius);
   }
 }
