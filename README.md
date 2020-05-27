@@ -4,6 +4,11 @@ A web-based ball motion game that uses device orientation API at its core.
 The purpose of this project is to demonstrate how to use the API and apply
 it to a project.
 
+## Prerequisites
+
+- [Node](https://nodejs.org/en/) (at least the latest LTS)
+- [Yarn](https://yarnpkg.com/lang/en/docs/install/) (at least 1.0)
+
 ## To build and start app
 
 ```
